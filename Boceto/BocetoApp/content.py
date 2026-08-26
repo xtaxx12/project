@@ -48,8 +48,9 @@ ABOUT_CARDS = [
         'icon_class': 'card__icon--gold',
         'titulo': 'Comercio Justo',
         'texto': (
-            'Contamos con Certificación Fair Trade, Orgánica, Global Gap, y Buenas Prácticas '
-            'de Manufactura para los mercados de USA, Europa y Japón.'
+            'Contamos con Certificación Fair Trade, Orgánica, Global Gap y Buenas Prácticas '
+            'de Manufactura. Hoy exportamos a Alemania, Italia y Francia, con habilitación '
+            'para Estados Unidos y Japón.'
         ),
     },
     {
@@ -88,43 +89,5 @@ CERTIFICACIONES = [
         'nombre': 'Orgánica',
         'logo': 'boceto/images/organica300.webp',
         'descripcion': 'Producción sin químicos sintéticos, respetuosa con el ambiente y la salud.',
-    },
-]
-
-# Testimoniales de muestra que se usan mientras no existan registros en la BD.
-# Mismos nombres de campos que el modelo Testimonial para poder iterarlos igual.
-TESTIMONIALES_EJEMPLO = [
-    {
-        'nombre': 'Hans Müller',
-        'cargo': 'Purchasing Director',
-        'empresa': 'BioFrisch GmbH',
-        'pais': '🇩🇪 Alemania',
-        'rating': 5,
-        'testimonio': (
-            'Excellent quality bananas with consistent supply. Oro Verde has been our '
-            'trusted partner for organic produce for over 3 years.'
-        ),
-    },
-    {
-        'nombre': 'Marco Rossi',
-        'cargo': 'CEO',
-        'empresa': 'Frutti Biologici S.r.l.',
-        'pais': '🇮🇹 Italia',
-        'rating': 5,
-        'testimonio': (
-            'La qualità delle banane è eccezionale. La certificazione Fair Trade è molto '
-            'importante per i nostri clienti in Italia.'
-        ),
-    },
-    {
-        'nombre': 'Sophie Dubois',
-        'cargo': 'Import Manager',
-        'empresa': 'FruitsBio France',
-        'pais': '🇫🇷 Francia',
-        'rating': 5,
-        'testimonio': (
-            "Les bananes biologiques d'Oro Verde sont parmi les meilleures que nous avons "
-            'importées. Service client impeccable.'
-        ),
     },
 ]

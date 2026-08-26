@@ -4,7 +4,7 @@
 	<ul class="cert-strip__logos">
 		{% for cert in certificaciones %}
 		<li>
-			<a href="#certifications" title="{{ cert.nombre }}">
+			<a href="#certifications" aria-label="Ver detalle de la certificación {{ cert.nombre }}">
 				<img src="{% static cert.logo %}" alt="Sello {{ cert.nombre }}"
 					width="200" height="200" decoding="async" />
 			</a>

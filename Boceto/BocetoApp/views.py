@@ -11,7 +11,7 @@ import logging
 
 from .models import Post, Cotizacion, Testimonial
 from .forms import ContactForm
-from .content import HERO_BADGES, KPIS, ABOUT_CARDS, CERTIFICACIONES, TESTIMONIALES_EJEMPLO
+from .content import HERO_BADGES, KPIS, ABOUT_CARDS, CERTIFICACIONES
 
 # Configurar logger para errores de email
 logger = logging.getLogger(__name__)
@@ -22,14 +22,17 @@ logger = logging.getLogger(__name__)
 # ============================================
 
 def _home_context():
-    """Contexto compartido de la página de inicio (contenido editorial + testimoniales)."""
-    testimoniales = list(Testimonial.objects.filter(activo=True)[:3])
+    """Contexto compartido de la página de inicio (contenido editorial + testimoniales).
+
+    La sección de testimoniales solo se muestra con registros reales cargados
+    desde el admin: nunca con datos de muestra.
+    """
     return {
         'hero_badges': HERO_BADGES,
         'kpis': KPIS,
         'about_cards': ABOUT_CARDS,
         'certificaciones': CERTIFICACIONES,
-        'testimoniales': testimoniales or TESTIMONIALES_EJEMPLO,
+        'testimoniales': Testimonial.objects.filter(activo=True)[:3],
         'contact_form': ContactForm(),
     }
 
