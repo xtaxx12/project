@@ -140,12 +140,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # Nombres de archivo con hash de contenido (main.abc123.css): cada deploy
 # invalida la caché del navegador automáticamente. Requiere collectstatic.
 # En DEBUG Django sirve los archivos sin manifest, así que no afecta desarrollo.
+# Variante tolerante: el CSS de jazzmin referencia source maps que el paquete
+# no incluye y la storage estricta abortaría collectstatic.
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+        "BACKEND": "BocetoApp.storage.ForgivingManifestStaticFilesStorage",
     },
 }
 
