@@ -47,7 +47,7 @@
 
         <!-- Imagen principal -->
         <div style="margin: -6rem auto 2rem; position: relative;">
-            <img src="{% if noticia.imagen %}{{ noticia.imagen.url }}{% else %}{% static 'boceto/images/pic01.png' %}{% endif %}"
+            <img src="{% if noticia.imagen %}{{ noticia.imagen.url }}{% else %}{% static 'boceto/images/pic01.webp' %}{% endif %}"
                 alt="{{ noticia.titulo }}"
                 style="width: 100%; height: 400px; object-fit: cover; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.2);" />
         </div>

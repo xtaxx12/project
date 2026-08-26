@@ -1,0 +1,23 @@
+{% load static %}
+<section id="certifications" class="section section--cream" aria-labelledby="certifications-title">
+	<div class="container">
+		<div class="section-header">
+			<h2 class="section-title" id="certifications-title">Fomentamos el Comercio Justo</h2>
+			<p class="section-subtitle">
+				Contamos con las certificaciones ORGÁNICA Y GLOBAL GAP individuales de cada uno de
+				nuestros socios para los mercados USA, Europa y Japón.
+			</p>
+		</div>
+
+		<div class="grid-auto grid-auto--certs">
+			{% for cert in certificaciones %}
+			<div class="card card--center">
+				<img src="{% static cert.logo %}" alt="Sello {{ cert.nombre }}" class="cert-card__logo"
+					width="200" height="200" loading="lazy" decoding="async" />
+				<h3 class="cert-card__title">{{ cert.nombre }}</h3>
+				<p class="cert-card__text">{{ cert.descripcion }}</p>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>

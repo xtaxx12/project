@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from django.core.mail import send_mail
 from django.http import HttpResponse, Http404, JsonResponse
 from django.views.decorators.http import require_POST, require_GET
@@ -9,6 +10,8 @@ from django.contrib import messages
 import logging
 
 from .models import Post, Cotizacion, Testimonial
+from .forms import ContactForm
+from .content import HERO_BADGES, ABOUT_CARDS, CERTIFICACIONES, TESTIMONIALES_EJEMPLO
 
 # Configurar logger para errores de email
 logger = logging.getLogger(__name__)
@@ -18,16 +21,20 @@ logger = logging.getLogger(__name__)
 # 🏠 VISTAS PRINCIPALES
 # ============================================
 
-def home(request):
-    """Vista de la página principal con testimoniales."""
-    testimoniales = Testimonial.objects.filter(activo=True)[:3]
-    return render(request, "boceto/home.html", {
-        'testimoniales': testimoniales
-    })
+def _home_context():
+    """Contexto compartido de la página de inicio (contenido editorial + testimoniales)."""
+    testimoniales = list(Testimonial.objects.filter(activo=True)[:3])
+    return {
+        'hero_badges': HERO_BADGES,
+        'about_cards': ABOUT_CARDS,
+        'certificaciones': CERTIFICACIONES,
+        'testimoniales': testimoniales or TESTIMONIALES_EJEMPLO,
+        'contact_form': ContactForm(),
+    }
 
-def base(request):
-    """Vista de la plantilla base."""
-    return render(request, "boceto/base.html")
+def home(request):
+    """Vista de la página principal."""
+    return render(request, "boceto/home.html", _home_context())
 
 def nosotros(request):
     """Vista de la página Nosotros con estilo premium."""
@@ -57,42 +64,17 @@ def cooporoverdesa(request):
 @require_POST
 def enviar_correo(request):
     """
-    Procesa el formulario de contacto y envía un correo de confirmación.
-    
-    Validaciones implementadas:
-    - Verifica que el email no esté vacío
-    - Valida el formato del email usando Django validators
-    - Usa el email configurado como remitente (no el del usuario)
-    - Registra errores en el log para debugging
+    Procesa el formulario de contacto con Django Forms y responde en la misma
+    página (patrón POST/Redirect/GET con django.contrib.messages).
     """
-    enviado_correctamente = False
-    error_mensaje = None
-    email = request.POST.get('email', '').strip()
-    
-    # Obtener testimoniales para la vista
-    testimoniales = Testimonial.objects.filter(activo=True)[:3]
-    
-    # ✅ VALIDACIÓN 1: Email no vacío
-    if not email:
-        error_mensaje = "Por favor, ingresa tu correo electrónico."
-        return render(request, 'boceto/home.html', {
-            'enviado_correctamente': False,
-            'error_mensaje': error_mensaje,
-            'testimoniales': testimoniales
-        })
-    
-    # ✅ VALIDACIÓN 2: Formato de email válido
-    try:
-        validate_email(email)
-    except ValidationError:
-        error_mensaje = "El correo electrónico ingresado no es válido."
-        return render(request, 'boceto/home.html', {
-            'enviado_correctamente': False,
-            'error_mensaje': error_mensaje,
-            'testimoniales': testimoniales
-        })
-    
-    # Configurar el correo
+    form = ContactForm(request.POST)
+
+    if not form.is_valid():
+        messages.error(request, form.errors['email'][0])
+        return redirect(f"{reverse('index')}#contact")
+
+    email = form.cleaned_data['email']
+
     subject = 'Gracias por ponerte en contacto con nosotros - Cooperativa Oro Verde'
     message = f"""
 Hola,
@@ -106,32 +88,22 @@ Atentamente,
 El equipo de Cooperativa Agrícola Oro Verde
 🍌 Produciendo banano orgánico con comercio justo
     """.strip()
-    
-    # ✅ CORRECCIÓN: Usar el email configurado como remitente
-    from_email = settings.EMAIL_HOST_USER
-    recipient_list = [email]
 
     try:
         send_mail(
             subject=subject,
             message=message,
-            from_email=from_email,
-            recipient_list=recipient_list,
-            fail_silently=False  # Para capturar errores
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[email],
+            fail_silently=False,
         )
-        enviado_correctamente = True
+        messages.success(request, '✅ Correo enviado correctamente. ¡Pronto te contactaremos!')
         logger.info(f"Correo enviado exitosamente a: {email}")
-        
     except Exception as e:
-        error_mensaje = "Hubo un problema al enviar el correo. Por favor, intenta más tarde."
+        messages.error(request, 'Hubo un problema al enviar el correo. Por favor, intenta más tarde.')
         logger.error(f"Error al enviar correo a {email}: {str(e)}")
-        enviado_correctamente = False
 
-    return render(request, 'boceto/home.html', {
-        'enviado_correctamente': enviado_correctamente,
-        'error_mensaje': error_mensaje,
-        'testimoniales': testimoniales
-    })
+    return redirect(f"{reverse('index')}#contact")
 
 
 # ============================================

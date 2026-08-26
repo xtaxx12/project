@@ -1,0 +1,29 @@
+{% load static %}
+<section id="social" class="section section--green" aria-labelledby="social-title">
+	<div class="container grid-split">
+		<div>
+			<h2 class="media-block__title" id="social-title">
+				Trabajamos por el Bienestar de Nuestra Comunidad
+			</h2>
+			<p class="media-block__text">
+				Realizamos actividades de reforestación de plantas nativas como parte de nuestra
+				vinculación con nuestra comunidad.
+			</p>
+			<p class="media-block__text">
+				Somos socios del programa <strong>Sembrando Vida</strong> de la Prefectura de El Oro
+				para devolver las especies nativas de árboles a nuestras tierras.
+			</p>
+			<a href="{% url 'labor' %}" class="btn btn-primary">
+				Conoce Nuestra Labor
+				<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+					<path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+				</svg>
+			</a>
+		</div>
+
+		<div class="img-frame">
+			<img src="{% static 'boceto/images/pic04.webp' %}" alt="Actividades de labor social de Oro Verde"
+				width="1200" height="788" loading="lazy" decoding="async" />
+		</div>
+	</div>
+</section>

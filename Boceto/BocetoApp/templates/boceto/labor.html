@@ -1,49 +1,54 @@
-<!-- Se hereda el contenido del archivo base.html-->
 {% extends "boceto/base.html" %}
-
-<!-- Se carga la carpeta static -->
 {% load static %}
 
-<!-- Empieza el contenido de esta página-->
+{% block title %}Labor Social{% endblock %}
+
 {% block content %}
 
-    <!-- Main -->
-    <div id="main" class="wrapper style1">
-        <div class="container">
-            <header class="major">
-                <h2>Constantemente estamos participando en Ferias y capacitaciones para la mejora continua de nuestros socios.</h2>
+<section class="section section--cream section--first" aria-labelledby="labor-title">
+    <div class="container">
+        <div class="section-header">
+            <h1 class="section-title" id="labor-title">Labor Social</h1>
+            <p class="section-subtitle">
+                Constantemente estamos participando en Ferias y capacitaciones
+                para la mejora continua de nuestros socios.
+            </p>
+        </div>
 
-            </header>
-            <div class="row gtr-150">
-                <div class="col-4 col-12-medium">
+        <div class="grid-auto">
+            <div class="card">
+                <img src="{% static 'boceto/images/viveros1-768x576.jpg' %}"
+                    alt="Instalaciones de los viveros del Concejo Provincial de El Oro"
+                    class="card__image" width="768" height="576" loading="lazy" decoding="async" />
+                <h2 class="card__title">Viveros</h2>
+                <p class="card__text">
+                    Visita a las instalaciones de Viveros del Concejo Provincial de El Oro
+                    en la Cuca Arenillas.
+                </p>
+            </div>
 
-                    <!-- Sidebar -->
-                        <section id="sidebar">
-                            <section>
-                                <a href="#" class="image fit"><img src="{% static 'boceto/images/viveros1-768x576.jpg' %}" alt="" /></a>
-                                <h3>Viveros</h3>
-                                <p>Visita a las instalaciones de Viveros del Concejo Provincial de El Oro en la Cuca Arenillas.</p>
-                            </section>
-                            <hr />
-                            <section>
-                                <a href="#" class="image fit"><img src="{% static 'boceto/images/reforestacion5-768x576.jpeg' %}" alt="" /></a>
-                                <h3>Sembrando vida</h3>
-                                <p>Lanzamiento de siembra de plantas del plan de reforestación.</p>
-                        </section>
+            <div class="card">
+                <img src="{% static 'boceto/images/reforestacion5-768x576.jpeg' %}"
+                    alt="Jornada de siembra del plan de reforestación"
+                    class="card__image" width="768" height="576" loading="lazy" decoding="async" />
+                <h2 class="card__title">Sembrando vida</h2>
+                <p class="card__text">
+                    Lanzamiento de siembra de plantas del plan de reforestación.
+                </p>
+            </div>
 
-                </div>
-                <div class="col-8 col-12-medium imp-medium">
-
-                    <!-- Content -->
-                        <section id="content">
-                            <a href="#" class="image fit"><img src="{% static 'boceto/images/expoferia3-768x576.jpeg' %}" alt="" /></a>
-                            <h3>Expo Feria</h3>
-                            <p>Participamos activamente en ferias internacionales para dar a conocer nuestro producto 
-                                y formar alianzas estratégicas para el beneficio de nuestra organización.</p>
-                        </section>
-                </div>
+            <div class="card">
+                <img src="{% static 'boceto/images/expoferia3-768x576.jpeg' %}"
+                    alt="Stand de la cooperativa en una expo feria internacional"
+                    class="card__image" width="768" height="576" loading="lazy" decoding="async" />
+                <h2 class="card__title">Expo Feria</h2>
+                <p class="card__text">
+                    Participamos activamente en ferias internacionales para dar a conocer nuestro producto
+                    y formar alianzas estratégicas para el beneficio de nuestra organización.
+                </p>
             </div>
         </div>
     </div>
+</section>
 
 {% endblock %}

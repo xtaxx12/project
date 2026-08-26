@@ -1,0 +1,39 @@
+<section id="contact" class="section section--green-dark" aria-labelledby="contact-title">
+	<div class="container--narrow">
+		<h2 class="section-title" id="contact-title">Contáctanos</h2>
+
+		{% if messages %}
+			{% for message in messages %}
+			<div class="form-alert {% if message.tags == 'error' %}form-alert--error{% else %}form-alert--success{% endif %}"
+				role="{% if message.tags == 'error' %}alert{% else %}status{% endif %}">
+				<p>{{ message }}</p>
+			</div>
+			{% endfor %}
+		{% else %}
+		<p class="contact-lead">
+			¿Interesado en nuestro banano orgánico? Déjanos tu correo y te contactaremos.
+		</p>
+		{% endif %}
+
+		<form method="post" action="{% url 'enviar_correo' %}" class="contact-form" novalidate>
+			{% csrf_token %}
+			<label for="{{ contact_form.email.id_for_label }}" class="sr-only">Correo electrónico</label>
+			{{ contact_form.email }}
+			<button type="submit" class="btn btn-primary">
+				Enviar
+				<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+					<path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+				</svg>
+			</button>
+		</form>
+
+		<p class="contact-lead contact-lead--alt">
+			¿Prefieres una cotización detallada?
+			<a href="{% url 'cotizacion' %}" class="link-gold">Solicitar Cotización →</a>
+		</p>
+
+		<p class="contact-note">
+			🔒 Tu información está segura con nosotros. No compartimos tus datos.
+		</p>
+	</div>
+</section>

@@ -1,0 +1,73 @@
+{% load static %}
+<section class="hero-premium" id="hero" aria-label="Presentación">
+	<div class="hero-background">
+		<img src="{% static 'boceto/images/dash.webp' %}" alt="" width="1024" height="572"
+			fetchpriority="high" decoding="async" />
+	</div>
+
+	<div class="hero-overlay"></div>
+
+	<span class="hero-floating hero-floating-1" aria-hidden="true">🍌</span>
+	<span class="hero-floating hero-floating-2" aria-hidden="true">🌿</span>
+	<span class="hero-floating hero-floating-3" aria-hidden="true">🌱</span>
+
+	<div class="hero-content">
+		<div class="hero-text">
+			<div class="hero-badge">
+				<svg viewBox="0 0 24 24" aria-hidden="true">
+					<path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+				</svg>
+				Certificación Fair Trade
+			</div>
+
+			<h1 class="hero-title">
+				Banano Orgánico Premium
+				<span>de Ecuador para el Mundo</span>
+			</h1>
+
+			<p class="hero-subtitle">
+				Somos una cooperativa de pequeños productores comprometidos con la calidad,
+				el comercio justo y la sostenibilidad. Exportamos nuestro banano orgánico
+				certificado a Alemania, Italia y Francia.
+			</p>
+
+			<ul class="hero-certifications" aria-label="Certificaciones">
+				{% for badge in hero_badges %}
+				<li class="certification-badge">
+					<svg viewBox="0 0 24 24" aria-hidden="true">
+						<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+					</svg>
+					{{ badge }}
+				</li>
+				{% endfor %}
+			</ul>
+
+			<div class="hero-cta">
+				<a href="#contact" class="btn btn-primary">
+					Solicitar Cotización
+					<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+						<path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+					</svg>
+				</a>
+				<a href="{% url 'nosotros' %}" class="btn btn-outline">
+					Conoce Nuestra Historia
+				</a>
+			</div>
+		</div>
+
+		<div class="hero-visual">
+			<div class="hero-logo-wrapper">
+				<div class="hero-logo-glow"></div>
+				<img src="{% static 'boceto/images/pic01.webp' %}" alt="Logo de la Cooperativa Oro Verde"
+					width="316" height="316" decoding="async" />
+			</div>
+		</div>
+	</div>
+
+	<a href="#about" class="hero-scroll">
+		<span>Descubre más</span>
+		<svg viewBox="0 0 24 24" aria-hidden="true">
+			<path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+		</svg>
+	</a>
+</section>

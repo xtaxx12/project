@@ -1,0 +1,34 @@
+<section id="testimonials" class="section section--white" aria-labelledby="testimonials-title">
+	<div class="container">
+		<div class="section-header">
+			<span class="badge-pill">Testimoniales</span>
+			<h2 class="section-title" id="testimonials-title">Lo que Dicen Nuestros Clientes</h2>
+			<p class="section-subtitle">
+				Empresas importadoras de Europa confían en la calidad de nuestro banano orgánico.
+			</p>
+		</div>
+
+		<div class="grid-auto grid-auto--testimonials">
+			{% for testimonio in testimoniales %}
+			<article class="testimonial">
+				<p class="testimonial__stars" aria-label="Calificación: {{ testimonio.rating }} de 5 estrellas">
+					<span aria-hidden="true">{% for i in "12345" %}{% if forloop.counter <= testimonio.rating %}★{% else %}☆{% endif %}{% endfor %}</span>
+				</p>
+				<blockquote class="testimonial__quote">
+					“{{ testimonio.testimonio }}”
+				</blockquote>
+				<div class="testimonial__author">
+					<div class="testimonial__avatar" aria-hidden="true">{{ testimonio.nombre|slice:":1" }}</div>
+					<div>
+						<p class="testimonial__name">{{ testimonio.nombre }}</p>
+						<p class="testimonial__meta">
+							{{ testimonio.cargo }}{% if testimonio.cargo %} — {% endif %}{{ testimonio.empresa }}
+						</p>
+						<p class="testimonial__meta">{{ testimonio.pais }}</p>
+					</div>
+				</div>
+			</article>
+			{% endfor %}
+		</div>
+	</div>
+</section>

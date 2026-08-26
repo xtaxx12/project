@@ -1,0 +1,22 @@
+<section id="about" class="section section--cream" aria-labelledby="about-title">
+	<div class="container">
+		<div class="section-header">
+			<h2 class="section-title" id="about-title">Nuestra Cooperativa</h2>
+			<p class="section-subtitle">
+				Somos una organización de pequeños productores de banano asentada en la zona sur de Ecuador.
+			</p>
+		</div>
+
+		<div class="grid-auto">
+			{% for card in about_cards %}
+			<div class="card">
+				<div class="card__icon {{ card.icon_class }}">
+					<span aria-hidden="true">{{ card.icon }}</span>
+				</div>
+				<h3 class="card__title">{{ card.titulo }}</h3>
+				<p class="card__text">{{ card.texto }}</p>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>

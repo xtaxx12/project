@@ -1,0 +1,31 @@
+{% with active=request.resolver_match.url_name %}
+<nav class="navbar-premium" id="navbar" aria-label="Navegación principal">
+	<a href="{% url 'index' %}" class="navbar-logo">
+		<span class="navbar-brand">Cooporo<span>verde</span></span>
+	</a>
+
+	<button class="navbar-toggle" id="navToggle" aria-label="Abrir menú de navegación"
+		aria-expanded="false" aria-controls="navMenu">
+		<span></span>
+		<span></span>
+		<span></span>
+	</button>
+
+	<ul class="navbar-menu" id="navMenu">
+		<li><a href="{% url 'index' %}" class="nav-link {% if active == 'index' %}active{% endif %}">Inicio</a></li>
+		<li><a href="{% url 'nosotros' %}" class="nav-link {% if active == 'nosotros' %}active{% endif %}">Nosotros</a></li>
+		<li><a href="{% url 'colaboradores' %}" class="nav-link {% if active == 'colaboradores' %}active{% endif %}">Colaboradores</a></li>
+		<li><a href="{% url 'labor' %}" class="nav-link {% if active == 'labor' %}active{% endif %}">Labor Social</a></li>
+		<li><a href="{% url 'noticias' %}" class="nav-link {% if active == 'noticias' %}active{% endif %}">Noticias</a></li>
+		<li class="nav-dropdown">
+			<button type="button" class="nav-link" aria-expanded="false" aria-controls="submenu-emprendimientos">
+				Emprendimientos <span aria-hidden="true">▾</span>
+			</button>
+			<ul class="nav-dropdown-menu" id="submenu-emprendimientos">
+				<li><a href="{% url 'banapan' %}" class="nav-dropdown-item"><span aria-hidden="true">🍞</span> Bana Pan</a></li>
+				<li><a href="{% url 'cooporoverdesa' %}" class="nav-dropdown-item"><span aria-hidden="true">🌱</span> Cooporoverdesa</a></li>
+			</ul>
+		</li>
+	</ul>
+</nav>
+{% endwith %}
