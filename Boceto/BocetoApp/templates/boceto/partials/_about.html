@@ -11,7 +11,9 @@
 			{% for card in about_cards %}
 			<div class="card">
 				<div class="card__icon {{ card.icon_class }}">
-					<span aria-hidden="true">{{ card.icon }}</span>
+					<svg viewBox="0 0 24 24" aria-hidden="true">
+						<path d="{{ card.icon_path }}" />
+					</svg>
 				</div>
 				<h3 class="card__title">{{ card.titulo }}</h3>
 				<p class="card__text">{{ card.texto }}</p>

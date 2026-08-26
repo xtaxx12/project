@@ -137,6 +137,18 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
+# Nombres de archivo con hash de contenido (main.abc123.css): cada deploy
+# invalida la caché del navegador automáticamente. Requiere collectstatic.
+# En DEBUG Django sirve los archivos sin manifest, así que no afecta desarrollo.
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+    },
+}
+
 MEDIA_URL = "/media/"
 
 # La línea `MEDIA_ROOT=os.path.join(BASE_DIR, 'media')` establece la ruta donde se ubicarán los archivos multimedia

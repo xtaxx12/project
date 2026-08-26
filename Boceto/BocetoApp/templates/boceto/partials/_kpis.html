@@ -1,0 +1,13 @@
+<section class="kpi-strip" aria-label="Cifras clave de la cooperativa">
+	<dl class="kpi-strip__grid">
+		{% for kpi in kpis %}
+		<div class="kpi">
+			<dt class="sr-only">{{ kpi.etiqueta }}</dt>
+			<dd>
+				<span class="kpi__value">{{ kpi.valor }}</span>
+				<span class="kpi__label" aria-hidden="true">{{ kpi.etiqueta }}</span>
+			</dd>
+		</div>
+		{% endfor %}
+	</dl>
+</section>

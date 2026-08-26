@@ -11,7 +11,7 @@ import logging
 
 from .models import Post, Cotizacion, Testimonial
 from .forms import ContactForm
-from .content import HERO_BADGES, ABOUT_CARDS, CERTIFICACIONES, TESTIMONIALES_EJEMPLO
+from .content import HERO_BADGES, KPIS, ABOUT_CARDS, CERTIFICACIONES, TESTIMONIALES_EJEMPLO
 
 # Configurar logger para errores de email
 logger = logging.getLogger(__name__)
@@ -26,6 +26,7 @@ def _home_context():
     testimoniales = list(Testimonial.objects.filter(activo=True)[:3])
     return {
         'hero_badges': HERO_BADGES,
+        'kpis': KPIS,
         'about_cards': ABOUT_CARDS,
         'certificaciones': CERTIFICACIONES,
         'testimoniales': testimoniales or TESTIMONIALES_EJEMPLO,

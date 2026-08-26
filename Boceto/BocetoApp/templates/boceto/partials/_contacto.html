@@ -1,39 +1,48 @@
-<section id="contact" class="section section--green-dark" aria-labelledby="contact-title">
-	<div class="container--narrow">
-		<h2 class="section-title" id="contact-title">Contáctanos</h2>
+<section id="contact" class="section section--cream" aria-labelledby="contact-title">
+	<div class="container">
+		<div class="contact-card">
+			<h2 class="section-title" id="contact-title">¿Listo para importar nuestro banano?</h2>
 
-		{% if messages %}
-			{% for message in messages %}
-			<div class="form-alert {% if message.tags == 'error' %}form-alert--error{% else %}form-alert--success{% endif %}"
-				role="{% if message.tags == 'error' %}alert{% else %}status{% endif %}">
-				<p>{{ message }}</p>
-			</div>
-			{% endfor %}
-		{% else %}
-		<p class="contact-lead">
-			¿Interesado en nuestro banano orgánico? Déjanos tu correo y te contactaremos.
-		</p>
-		{% endif %}
+			{% if messages %}
+				{% for message in messages %}
+				<div class="form-alert {% if message.tags == 'error' %}form-alert--error{% else %}form-alert--success{% endif %}"
+					role="{% if message.tags == 'error' %}alert{% else %}status{% endif %}">
+					<p>{{ message }}</p>
+				</div>
+				{% endfor %}
+			{% else %}
+			<p class="contact-lead">
+				Cuéntanos tu país, volumen y tipo de empaque y te preparamos una propuesta.
+			</p>
+			{% endif %}
 
-		<form method="post" action="{% url 'enviar_correo' %}" class="contact-form" novalidate>
-			{% csrf_token %}
-			<label for="{{ contact_form.email.id_for_label }}" class="sr-only">Correo electrónico</label>
-			{{ contact_form.email }}
-			<button type="submit" class="btn btn-primary">
-				Enviar
-				<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
-					<path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+			<a href="{% url 'cotizacion' %}" class="btn btn-primary--invert">
+				Solicitar Cotización Detallada
+				<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+					<path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
 				</svg>
-			</button>
-		</form>
+			</a>
 
-		<p class="contact-lead contact-lead--alt">
-			¿Prefieres una cotización detallada?
-			<a href="{% url 'cotizacion' %}" class="link-gold">Solicitar Cotización →</a>
-		</p>
+			<p class="contact-divider">o déjanos tu correo y te contactamos</p>
 
-		<p class="contact-note">
-			🔒 Tu información está segura con nosotros. No compartimos tus datos.
-		</p>
+			<form method="post" action="{% url 'enviar_correo' %}" class="contact-form" novalidate>
+				{% csrf_token %}
+				<label for="{{ contact_form.email.id_for_label }}" class="sr-only">Correo electrónico</label>
+				{{ contact_form.email }}
+				<button type="submit" class="btn btn-primary--invert">
+					Enviar
+					<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+						<path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+					</svg>
+				</button>
+			</form>
+
+			<p class="contact-note">
+				<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+					<path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM9 8V6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9z" />
+				</svg>
+				Tu información está segura con nosotros. No compartimos tus datos.
+			</p>
+		</div>
 	</div>
 </section>

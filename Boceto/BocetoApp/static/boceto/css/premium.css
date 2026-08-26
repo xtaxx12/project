@@ -22,13 +22,19 @@
     --color-gold: #996515;
     --color-gold-dark: #7A5012;
     --color-gold-light: #B8860B;
+    /* Dorado profundo: 3:1 sobre crema (estrellas, acentos pequeños) */
+    --color-gold-deep: #8A6508;
+    /* Dorados brillantes: para componentes sobre fondos verdes (CTA, KPIs) */
+    --color-gold-bright: #D4AF37;
+    --color-gold-soft: #E5C158;
     --color-bronze: #8B5A2B;
 
     /* Neutrales */
     --color-white: #FFFFFF;
     --color-cream: #F5F5DC;
     --color-gray-light: #F8F9FA;
-    --color-gray: #6C757D;
+    /* 4.6:1 sobre crema (antes #6C757D: 4.24:1) */
+    --color-gray: #5A6268;
     --color-gray-dark: #343A40;
     --color-black: #212121;
 
@@ -150,12 +156,14 @@ body {
 }
 
 .nav-link {
+    display: inline-block;
     font-family: var(--font-body);
     font-size: 0.95rem;
     font-weight: 500;
     color: var(--color-white);
     text-decoration: none;
-    padding: var(--spacing-xs) var(--spacing-sm);
+    /* Área táctil >= 44px de alto */
+    padding: 0.8rem var(--spacing-sm);
     position: relative;
     transition: color var(--transition-fast);
 }
@@ -278,7 +286,8 @@ body {
     object-fit: cover;
 }
 
-/* OVERLAY GRADIENTE - SOLUCIÓN AL CONTRASTE */
+/* Overlay oscuro que se aclara hacia la derecha: el texto (izquierda)
+   queda sobre verde profundo y la foto de la plantación respira a la derecha */
 .hero-overlay {
     position: absolute;
     top: 0;
@@ -286,9 +295,9 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg,
-            rgba(13, 61, 20, 0.9) 0%,
-            rgba(27, 94, 32, 0.7) 50%,
-            rgba(46, 125, 50, 0.5) 100%);
+            rgba(13, 61, 20, 0.82) 0%,
+            rgba(13, 61, 20, 0.55) 55%,
+            rgba(13, 61, 20, 0.25) 100%);
     z-index: -1;
 }
 
@@ -298,14 +307,15 @@ body {
     margin: 0 auto;
     padding: calc(var(--spacing-xxl) + 80px) var(--spacing-xl) var(--spacing-xxl);
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-xxl);
+    grid-template-columns: 1fr;
     align-items: center;
+    width: 100%;
 }
 
-/* Hero text con color verde oscuro para legibilidad sobre fondo beige */
+/* Texto claro sobre el overlay oscuro */
 .hero-text {
-    color: var(--color-primary-dark);
+    color: var(--color-white);
+    max-width: 680px;
 }
 
 .hero-badge {
@@ -340,22 +350,21 @@ body {
     margin-bottom: var(--spacing-md);
     animation: fadeInUp 0.6s ease 0.1s forwards;
     opacity: 0;
-    color: var(--color-primary-dark);
+    color: var(--color-white);
 }
 
-/* Título destacado en color bronce/ocre para mejor contraste */
+/* Línea destacada en dorado sobre el overlay oscuro */
 .hero-title span {
-    color: var(--color-bronze);
+    color: var(--color-gold-soft);
     display: block;
 }
 
-/* Subtítulo en verde oscuro profundo para legibilidad */
 .hero-subtitle {
     font-size: 1.25rem;
     font-weight: 400;
     line-height: 1.8;
     margin-bottom: var(--spacing-lg);
-    color: var(--color-primary-dark);
+    color: rgba(255, 255, 255, 0.92);
     animation: fadeInUp 0.6s ease 0.2s forwards;
     opacity: 0;
 }
@@ -461,6 +470,36 @@ body {
     transform: translateY(-3px);
 }
 
+/* Outline claro para el hero (overlay oscuro) */
+.hero-premium .btn-outline {
+    color: var(--color-white);
+    border-color: var(--color-white);
+}
+
+.hero-premium .btn-outline:hover {
+    background: var(--color-white);
+    color: var(--color-primary-dark);
+}
+
+/* Variante dorada: para CTAs sobre fondos verdes (hero, #social, contacto).
+   #1A1A1A sobre #D4AF37 = 8.3:1; botón vs verde de sección = 3.7:1 */
+.btn-primary--invert,
+.hero-premium .btn-primary,
+.section--green .btn-primary,
+.contact-card .btn-primary {
+    background: linear-gradient(135deg, var(--color-gold-soft), var(--color-gold-bright));
+    color: #1A1A1A;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
+}
+
+.btn-primary--invert:hover,
+.hero-premium .btn-primary:hover,
+.section--green .btn-primary:hover,
+.contact-card .btn-primary:hover {
+    background: linear-gradient(135deg, #F0DA8A, var(--color-gold-soft));
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.45);
+}
+
 .btn svg {
     width: 18px;
     height: 18px;
@@ -469,91 +508,6 @@ body {
 
 .btn:hover svg {
     transform: translateX(4px);
-}
-
-/* ============================================
-   HERO LOGO/IMAGE SECTION
-   ============================================ */
-.hero-visual {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: fadeInRight 0.8s ease 0.3s forwards;
-    opacity: 0;
-}
-
-/* Logo encerrado en círculo blanco como sello de calidad */
-.hero-logo-wrapper {
-    position: relative;
-    width: 320px;
-    height: 320px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--color-white);
-    border-radius: 50%;
-    box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.15),
-        0 2px 8px rgba(0, 0, 0, 0.1),
-        inset 0 -2px 6px rgba(0, 0, 0, 0.05);
-    border: 4px solid rgba(255, 255, 255, 0.8);
-}
-
-.hero-logo-glow {
-    position: absolute;
-    width: 110%;
-    height: 110%;
-    background: radial-gradient(circle, rgba(139, 90, 43, 0.15) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: pulse 3s ease-in-out infinite;
-    z-index: -1;
-}
-
-/* Logo más grande para llenar mejor el círculo */
-.hero-logo-wrapper img {
-    width: 260px;
-    height: auto;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-    transition: transform var(--transition-normal);
-}
-
-.hero-logo-wrapper:hover {
-    box-shadow:
-        0 12px 40px rgba(0, 0, 0, 0.2),
-        0 4px 12px rgba(0, 0, 0, 0.15),
-        inset 0 -2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.hero-logo-wrapper:hover img {
-    transform: scale(1.05);
-}
-
-/* Floating elements decorativos */
-.hero-floating {
-    position: absolute;
-    opacity: 0.1;
-    animation: float 6s ease-in-out infinite;
-}
-
-.hero-floating-1 {
-    top: 20%;
-    left: 10%;
-    font-size: 4rem;
-    animation-delay: 0s;
-}
-
-.hero-floating-2 {
-    bottom: 30%;
-    right: 5%;
-    font-size: 3rem;
-    animation-delay: 2s;
-}
-
-.hero-floating-3 {
-    top: 60%;
-    left: 5%;
-    font-size: 2.5rem;
-    animation-delay: 4s;
 }
 
 /* Scroll indicator */
@@ -605,44 +559,6 @@ body {
     }
 }
 
-@keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes pulse {
-
-    0%,
-    100% {
-        transform: scale(1);
-        opacity: 0.3;
-    }
-
-    50% {
-        transform: scale(1.1);
-        opacity: 0.5;
-    }
-}
-
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg);
-    }
-
-    50% {
-        transform: translateY(-20px) rotate(5deg);
-    }
-}
-
 @keyframes bounce {
 
     0%,
@@ -667,35 +583,7 @@ body {
    ============================================ */
 @media (max-width: 1024px) {
     .hero-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding: var(--spacing-xxl) var(--spacing-lg);
-    }
-
-    .hero-text {
-        order: 2;
-    }
-
-    .hero-visual {
-        order: 1;
-        margin-bottom: var(--spacing-lg);
-    }
-
-    .hero-logo-wrapper {
-        width: 250px;
-        height: 250px;
-    }
-
-    .hero-logo-wrapper img {
-        width: 200px;
-    }
-
-    .hero-certifications {
-        justify-content: center;
-    }
-
-    .hero-cta {
-        justify-content: center;
+        padding: calc(var(--spacing-xxl) + 70px) var(--spacing-lg) var(--spacing-xxl);
     }
 }
 
@@ -828,6 +716,76 @@ body {
 }
 
 /* ============================================
+   FRANJA DE KPIs (bajo el hero)
+   ============================================ */
+.kpi-strip {
+    background: var(--color-primary-dark);
+    color: var(--color-white);
+    padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 4vw, 2rem);
+}
+
+.kpi-strip__grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
+    gap: var(--spacing-lg);
+    text-align: center;
+}
+
+.kpi__value {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--color-gold-soft);
+}
+
+.kpi__label {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    opacity: 0.85;
+}
+
+/* ============================================
+   FRANJA DE LOGOS DE CERTIFICACIÓN (bajo KPIs)
+   ============================================ */
+.cert-strip {
+    background: var(--color-white);
+    padding: var(--spacing-lg) clamp(1rem, 4vw, 2rem);
+    text-align: center;
+}
+
+.cert-strip__label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-gray);
+    margin-bottom: var(--spacing-md);
+}
+
+.cert-strip__logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cert-strip__logos img {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+}
+
+/* ============================================
    GRIDS REUTILIZABLES
    ============================================ */
 .grid-auto {
@@ -837,8 +795,16 @@ body {
     margin-top: var(--spacing-xl);
 }
 
+/* Flex centrado: con 5 tarjetas la última fila queda centrada, no huérfana */
 .grid-auto--certs {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.grid-auto--certs>.card {
+    flex: 1 1 200px;
+    max-width: 260px;
 }
 
 .grid-auto--testimonials {
@@ -889,8 +855,14 @@ body {
     font-size: 1.5rem;
 }
 
+.card__icon svg {
+    width: 30px;
+    height: 30px;
+    fill: var(--color-white);
+}
+
 .card__icon--gold {
-    background: linear-gradient(135deg, #D4AF37, #E5C158);
+    background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
 }
 
 .card__icon--light {
@@ -1009,8 +981,11 @@ body {
     font-weight: 500;
 }
 
-.feature-item .check {
-    color: var(--color-gold);
+.feature-item svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    fill: var(--color-gold-deep);
 }
 
 /* ============================================
@@ -1024,7 +999,8 @@ body {
 
 .testimonial__stars {
     margin-bottom: var(--spacing-sm);
-    color: #B8860B;
+    /* 3.2:1 sobre crema (antes #B8860B: 2.94:1) */
+    color: var(--color-gold-deep);
 }
 
 .testimonial__quote {
@@ -1070,6 +1046,45 @@ body {
 /* ============================================
    FORMULARIO DE CONTACTO
    ============================================ */
+/* Tarjeta verde sobre sección crema: rompe el bloque verde continuo
+   que formaban #contact + footer */
+.contact-card {
+    background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+    color: var(--color-white);
+    text-align: center;
+    padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.contact-card .section-title {
+    color: var(--color-white);
+}
+
+.contact-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-lg) 0 var(--spacing-md);
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.contact-divider::before,
+.contact-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.contact-note svg {
+    vertical-align: -3px;
+    margin-right: 4px;
+}
+
 .contact-form {
     display: flex;
     gap: var(--spacing-sm);
@@ -1187,8 +1202,6 @@ body {
 @media (prefers-reduced-motion: reduce) {
 
     .whatsapp-btn::before,
-    .hero-floating,
-    .hero-logo-glow,
     .hero-scroll {
         animation: none;
     }
@@ -1281,7 +1294,7 @@ main {
     font-family: var(--font-heading);
     font-size: 1.5rem;
     margin-bottom: var(--spacing-sm);
-    color: #E5C158;
+    color: var(--color-gold-soft);
 }
 
 .footer-heading {

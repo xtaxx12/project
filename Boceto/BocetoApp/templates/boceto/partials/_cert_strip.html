@@ -1,0 +1,14 @@
+{% load static %}
+<section class="cert-strip" aria-label="Sellos de certificación">
+	<p class="cert-strip__label">Certificados internacionalmente</p>
+	<ul class="cert-strip__logos">
+		{% for cert in certificaciones %}
+		<li>
+			<a href="#certifications" title="{{ cert.nombre }}">
+				<img src="{% static cert.logo %}" alt="Sello {{ cert.nombre }}"
+					width="200" height="200" decoding="async" />
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+</section>
